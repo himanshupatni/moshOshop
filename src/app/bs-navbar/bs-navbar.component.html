@@ -14,33 +14,36 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-
       <li class="nav-item">
         <a class="nav-link" routerLink="/shopping-cart">Shopping Cart</a>
       </li>
-        <li *ngIf="!user" class="nav-item">
-        <a class="nav-link" routerLink="/login">Login</a>
-      </li>
+      <ng-template #anonymousUser>
+        <li  class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+      </ng-template>
 
-      <li class="nav-item dropdown" *ngIf="user">
+      <li
+        class="nav-item dropdown"
+        *ngIf="auth.user$ | async as user; else anonymousUser"
+      >
         <a
           class="nav-link dropdown-toggle"
-
           id="dropdown01"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
-          >{{user.displayName}}</a
+          >{{ user.displayName }}</a
         >
-        <div  class="dropdown-menu" aria-labelledby="dropdown01">
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" routerLink="/my/orders">My Orders</a>
           <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
-          <a class="dropdown-item" routerLink="/admin/products">Manage Products</a>
-          <a class="dropdown-item" (click)="logout()" >Logout</a>
-
+          <a class="dropdown-item" routerLink="/admin/products"
+            >Manage Products</a
+          >
+          <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>
       </li>
     </ul>
-
   </div>
 </nav>
