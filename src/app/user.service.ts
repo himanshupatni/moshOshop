@@ -16,10 +16,12 @@ export class UserService {
     });
   }
 
-  get(uid: string): any
+  get (uid: string): any
   {
     console.log(uid);
 
     return this.db.object('/users/' + uid);
+
+
   }
 }
