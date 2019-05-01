@@ -8,14 +8,17 @@ import { Component, OnInit } from "@angular/core";
 })
 export class BsNavbarComponent implements OnInit {
   appUser: AppUser;
+  a;
   constructor(public auth: AuthService) {
-    auth.appUser$.subscribe(appUser =>
+    this.a =auth.appUser$.subscribe(appUser =>
       {
         this.appUser= appUser
         console.log(appUser,this.appUser)
-      console.log(this.appUser.isAdmin);
+      // console.log(this.appUser.isAdmin);
 
     });
+    console.log("here i m"+this.a);
+
 
    }
 
