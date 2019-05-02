@@ -12,8 +12,8 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   product$ = [];
   subscription: Subscription;
   fileteredProducts: any[];
-  p: Boolean = true;
-  f: Boolean = false;
+  produc: Boolean = true;
+  filterproduct: Boolean = false;
   constructor(private productService: ProductService) {
     this.subscription = this.productService
       .getAll()
@@ -37,8 +37,8 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
   filter(keyword) {
     console.log(keyword);
-    this.f = true;
-    this.p = false;
+    this.filterproduct = true;
+    this.produc = false;
     this.fileteredProducts = keyword
       ? this.product$.filter(p =>
           p.title.toLowerCase().includes(keyword.toLowerCase())

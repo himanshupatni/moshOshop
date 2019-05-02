@@ -1,3 +1,16 @@
-<p>
-  products works!
-</p>
+<div class="container">
+    <div class="row">
+      <ng-container *ngFor="let p of products$;  let i= index">
+          <div class="col">
+                <img class="card-img-top" src="{{p.imageUrl}}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{p.title}}</h5>
+                  <p class="card-text">{{p.price | currency : 'INR': true}}</p>
+                  <a href="#" class="btn btn-primary">Add to Card</a>
+                </div>
+            </div>
+        <div *ngIf="(i+1)%2 === 0" class="w-100"></div>
+      </ng-container>
+    </div>
+  </div>
+
