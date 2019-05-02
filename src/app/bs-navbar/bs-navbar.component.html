@@ -28,16 +28,12 @@
 
       <li
         class="nav-item dropdown"
-        *ngIf="appUser; else anonymousUser"
-      >
-        <a
-          class="nav-link dropdown-toggle"
+        *ngIf="appUser; else anonymousUser" >
+        <a class="nav-link dropdown-toggle"
           id="dropdown01"
           data-toggle="dropdown"
           aria-haspopup="true"
-          aria-expanded="false"
-          >{{ appUser.displayName }}</a
-        >
+          aria-expanded="false">{{ appUser.displayName }}</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" routerLink="/my/orders">My Orders</a>
           <!-- <ng-container *ngIf="appUser.isAdmin"> -->

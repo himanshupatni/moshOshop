@@ -1,17 +1,16 @@
-import { ProductService } from 'src/app/product.service';
-import { Component, OnInit } from '@angular/core';
+import { ProductService } from "src/app/product.service";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  selector: "app-products",
+  templateUrl: "./products.component.html",
+  styleUrls: ["./products.component.scss"]
 })
 export class ProductsComponent implements OnInit {
-  products$=[];
-  constructor(private productService:ProductService) {
-
+  products$ = [];
+  constructor(private productService: ProductService) {
     this.productService.getAll().subscribe((actions: any) => {
-       actions.forEach(action => {
+      actions.forEach(action => {
         this.products$.push({
           id: action.key,
           category: action.payload.val().category,
@@ -21,12 +20,8 @@ export class ProductsComponent implements OnInit {
         });
       });
     });
-    console.log(this.products$ );
-
-   }
-
-  ngOnInit() {
-
+    console.log(this.products$);
   }
 
+  ngOnInit() {}
 }
