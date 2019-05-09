@@ -1,3 +1,5 @@
+import { ActivatedRoute } from "@angular/router";
+import { CategoryService } from "./../category.service";
 import { ProductService } from "src/app/product.service";
 import { Component, OnInit } from "@angular/core";
 
@@ -8,7 +10,14 @@ import { Component, OnInit } from "@angular/core";
 })
 export class ProductsComponent implements OnInit {
   products$ = [];
-  constructor(private productService: ProductService) {
+  category: string;
+  filteredProduct = [];
+  categories$ = [];
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private categoryService: CategoryService
+  ) {
     this.productService.getAll().subscribe((actions: any) => {
       actions.forEach(action => {
         this.products$.push({
@@ -20,7 +29,22 @@ export class ProductsComponent implements OnInit {
         });
       });
     });
-    console.log(this.products$);
+    this.categoryService.getCategories().subscribe((actions: any) => {
+      actions.forEach(action => {
+        this.categories$.push({
+          id: action.key,
+          category: action.payload.val().category
+        });
+      });
+    });
+    route.queryParamMap.subscribe(params => {
+      this.category = params.get("category");
+      this.filteredProduct =(this.category)? this.products$.filter(p => p.category ===this.category): this.products$;
+      console.log(this.category);
+    });
+    console.log(this.categories$);
+
+    // console.log(this.products$);
   }
 
   ngOnInit() {}

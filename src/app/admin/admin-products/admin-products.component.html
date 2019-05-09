@@ -2,13 +2,7 @@
   <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
 <div class="form-group">
-  <input
-    type="text"
-    #keyword
-    (keyup)="filter(keyword.value)"
-    class="form-control"
-    placeholder="Search....."
-  />
+  <input type="text" #keyword (keyup)="filter(keyword.value)" class="form-control" placeholder="Search....." />
 </div>
 <!-- <p>{{product$[1].title}}</p> -->
 <div *ngIf="produc">

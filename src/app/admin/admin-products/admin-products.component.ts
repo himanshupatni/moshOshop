@@ -1,4 +1,3 @@
-import { Router, ActivatedRoute } from "@angular/router";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ProductService } from "src/app/product.service";
 import { Subscription } from "rxjs";
@@ -33,6 +32,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
       console.log(this.product$);
     }, 2000);
   }
+
   ngOnInit() {}
 
   filter(keyword) {
@@ -45,6 +45,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
         )
       : this.product$;
   }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
