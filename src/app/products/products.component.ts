@@ -1,6 +1,8 @@
+import { Subscription } from 'rxjs';
 import { ActivatedRoute } from "@angular/router";
 import { ProductService } from "src/app/product.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
+import { ShoppingCartService } from '../shopping-cart.service';
 
 @Component({
   selector: "app-products",
@@ -10,8 +12,13 @@ import { Component, OnInit } from "@angular/core";
 export class ProductsComponent implements OnInit {
   products = [];
   filteredProduct = [];
-
-  constructor(
+  category ;
+  @Input ('product') product:any;
+ @Input ('show-actions') showActions= true;
+ @Input ('shopping-cart' ) shoppingCart;
+ cart;
+ subscription: Subscription;
+  constructor( private shoppingCartService:ShoppingCartService,
     private route: ActivatedRoute,
     private productService: ProductService,
 
@@ -38,5 +45,12 @@ export class ProductsComponent implements OnInit {
     // console.log(this.products$);
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.subscription = (await this.shoppingCartService.getCart()).subscribe(cart => this.cart =cart);
+
+  }
+
+  ngOnDestroy(){
+  this.subscription.unsubscribe();
+  }
 }

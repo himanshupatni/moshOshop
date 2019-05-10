@@ -16,4 +16,11 @@
 
 }
 
-
+.card-img-top{
+ object-fit: cover;
+}
+.col-8{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
