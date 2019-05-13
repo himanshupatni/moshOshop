@@ -16,7 +16,7 @@ export class ProductsComponent implements OnInit {
   @Input ('product') product:any;
  @Input ('show-actions') showActions= true;
  @Input ('shopping-cart' ) shoppingCart;
- cart;
+ cart:any;
  subscription: Subscription;
   constructor( private shoppingCartService:ShoppingCartService,
     private route: ActivatedRoute,
@@ -46,7 +46,13 @@ export class ProductsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.subscription = (await this.shoppingCartService.getCart()).subscribe(cart => this.cart =cart);
+    this.subscription = (await this.shoppingCartService.getCart()).subscribe(cart => {
+      this.cart =cart
+      // console.log(this.cart.items);
+
+    } );
+    console.log(this.subscription);
+
 
   }
 

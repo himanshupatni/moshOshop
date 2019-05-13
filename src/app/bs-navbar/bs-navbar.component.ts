@@ -9,7 +9,7 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class BsNavbarComponent implements OnInit {
   appUser: AppUser;
-shoppingCartItemCount:number;
+shoppingCartItemCount=0;
   constructor(public auth: AuthService, private shoppingCartService:ShoppingCartService) {
 
    }
@@ -19,12 +19,12 @@ shoppingCartItemCount:number;
 
     let cart$= await this.shoppingCartService.getCart();
         cart$.subscribe((cart:any) => {
-          this.shoppingCartItemCount=0;
           // console.log(cart.items.getKey());
           console.log(cart.items);
-          for(let productId in cart['items']){
-            this.shoppingCartItemCount +=cart.items[productId].quantity;
-            console.log(this.shoppingCartItemCount);
+          this.shoppingCartItemCount=0;
+          for(let productId in cart.items){
+            this.shoppingCartItemCount +=cart.items[productId].quantity
+            console.log(cart.items[productId].quantity);
           }
 
 

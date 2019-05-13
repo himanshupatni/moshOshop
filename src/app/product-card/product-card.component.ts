@@ -15,10 +15,12 @@ export class ProductCardComponent  {
  cart;
 subscription: Subscription;
   constructor(private shoppingCartService:ShoppingCartService) {
-    console.log("Show Actions" + this.showActions);
+    // console.log("Show Actions" + this.showActions);
   }
 
   addToCart(){
+    // console.log(this.product );
+
    this.shoppingCartService.addToCart(this.product);
 
 }
@@ -29,6 +31,8 @@ removeFromCart(){
 getQuantity(){
   if(!this.shoppingCart) return 0;
   let item =this.shoppingCart.items[this.product.id];
+  // console.log("item" + item);
+
   return item ? item.quantity: 0;
 }
 

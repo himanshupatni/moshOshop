@@ -1,5 +1,6 @@
 export interface Product {
-$key:string
+$key:string;
+id: string;
   title: string;
   price: number;
   cateogry: string;
