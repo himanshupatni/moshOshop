@@ -13,6 +13,7 @@ export class ProductCardComponent  {
  @Input ('show-actions') showActions= true;
  @Input ('shopping-cart' ) shoppingCart;
  cart;
+ item:any;
 subscription: Subscription;
   constructor(private shoppingCartService:ShoppingCartService) {
     // console.log("Show Actions" + this.showActions);
@@ -30,10 +31,10 @@ removeFromCart(){
 
 getQuantity(){
   if(!this.shoppingCart) return 0;
-  let item =this.shoppingCart.items[this.product.id];
+  this.item =this.shoppingCart.items[this.product.id];
   // console.log("item" + item);
 
-  return item ? item.quantity: 0;
+  return this.item ? this.item.quantity: 0;
 }
 
 }

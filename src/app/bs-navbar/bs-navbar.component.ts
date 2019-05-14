@@ -1,7 +1,7 @@
-import { AppUser } from './../models/app-user';
+import { AppUser } from "./../models/app-user";
 import { AuthService } from "./../auth.service";
 import { Component, OnInit } from "@angular/core";
-import { ShoppingCartService } from '../shopping-cart.service';
+import { ShoppingCartService } from "../shopping-cart.service";
 @Component({
   selector: "app-bs-navbar",
   templateUrl: "./bs-navbar.component.html",
@@ -9,27 +9,17 @@ import { ShoppingCartService } from '../shopping-cart.service';
 })
 export class BsNavbarComponent implements OnInit {
   appUser: AppUser;
-shoppingCartItemCount=0;
-  constructor(public auth: AuthService, private shoppingCartService:ShoppingCartService) {
 
-   }
+  cart$: any;
+  constructor(
+    public auth: AuthService,
+    private shoppingCartService: ShoppingCartService
+  ) {}
 
   async ngOnInit() {
-    this.auth.appUser$.subscribe(appUser =>   this.appUser= appUser  );
+    this.auth.appUser$.subscribe(appUser => (this.appUser = appUser));
 
-    let cart$= await this.shoppingCartService.getCart();
-        cart$.subscribe((cart:any) => {
-          // console.log(cart.items.getKey());
-          console.log(cart.items);
-          this.shoppingCartItemCount=0;
-          for(let productId in cart.items){
-            this.shoppingCartItemCount +=cart.items[productId].quantity
-            console.log(cart.items[productId].quantity);
-          }
-
-
-
-        })
+    this.cart$ = await this.shoppingCartService.getCart();
   }
   logout() {
     this.auth.logout();
